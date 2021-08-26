@@ -1,0 +1,16 @@
+#!/bin/sh
+mkdir temp && cd temp
+sudo apt-get -qq install -y aria2 > /dev/null 2>&1
+curl -s -o 7z.txz https://www.7-zip.org/$(curl -s https://www.7-zip.org/download.html | grep linux-x64 | cut -d \" -f 6)
+curl -s -o rar.tgz https://www.rarlab.com$(curl -s https://www.rarlab.com/download.htm | grep linux-x64 | cut -d \" -f 2)
+tar xf 7z.txz
+tar xf rar.tgz
+cat << 'EOF' > gdl
+#!/bin/sh
+curl -s -c cookie -o /dev/null $1
+aria2c -x3 -q --load-cookies=cookie $(echo $1 | cut -c 1-23)download.php?file=$(echo $1 | cut -c 24-)
+rm cookie
+EOF
+chmod 755 gdl
+mv 7zz rar/rar gdl /usr/local/bin/
+cd .. && rm -rf temp
