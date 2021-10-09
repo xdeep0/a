@@ -8,7 +8,7 @@ tar xf rar.tgz
 cat << 'EOF' > gdl
 #!/bin/sh
 curl -s -c cookie -o /dev/null $2
-aria2c -k 1M -s $1 -x $1 --load-cookies=cookie $(echo $2 | cut -c 1-23)download.php?file=$(echo $2 | cut -c 24-)
+aria2c -k 1M -s $1 -x $1 -q --load-cookies=cookie $(echo $2 | cut -c 1-23)download.php?file=$(echo $2 | cut -c 24-)
 rm cookie
 EOF
 chmod 755 gdl
