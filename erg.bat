@@ -2,6 +2,7 @@
 
 curl -OL https://raw.githubusercontent.com/xdeep0/a/main/7z_aria.tgz
 tar xf 7z_aria.tgz
+del 7z_aria.tgz
 
 rem download gigafile
 set gf_url=%1
