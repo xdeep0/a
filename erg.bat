@@ -1,6 +1,6 @@
 @echo off
 
-ren download vb_cable
+rem download vb_cable
 curl -L -o vb.zip https://download.vb-audio.com/Download_CABLE/VBCABLE_Driver_Pack43.zip
 mkdir vb
 tar xf vb.zip -C vb
