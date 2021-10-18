@@ -9,13 +9,15 @@ set g_save_parent=%6
 set g_work_dir=C:\Users\Administrator\Downloads
 set path=%path%;%g_work_dir%\bin
 
+cd %g_work_dir%
+
 curl -L -o utils.tgz %g_utils%
 tar xf utils.tgz
 del utils.tgz
 
 for /f "usebackq delims=" %%a in (`curl -w "%%{redirect_url}" -s -o nul %g_url%`) do set g_url=%%a
 curl -s -c c.txt -o nul %g_url%
-aria2c -k1M -s16 -x16 -o g.7z --load-cookies=c.txt %gf_url:~0,23%download.php?file=%gf_url:~23%
+aria2c -k1M -s16 -x16 -o g.7z --load-cookies=c.txt %g_url:~0,23%download.php?file=%g_url:~23%
 7z x -p%g_pswd% g.7z
 del c.txt g.7z
 
@@ -25,6 +27,8 @@ del %g_save_name%
 
 (
 echo @echo off
+echo set path=%path%;%g_work_dir%\bin
 echo tar caf %g_save_name% -C %g_save_dir% %g_save_parent%
 echo rclone copy %g_save_name% dr:
+echo rmdir /s /q %g_work_dir%
 ) > save.bat
