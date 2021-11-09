@@ -1,0 +1,11 @@
+pip3 install -q -U requests > /dev/null 2>&1 && \
+pip3 install -q selenium > /dev/null 2>&1 && \
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && \
+sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - && \
+sudo apt-get -qq update && \
+sudo apt-get -qq install -y google-chrome-stable > /dev/null 2>&1 && \
+google-chrome --version && \
+wget -q -O ch.zip https://chromedriver.storage.googleapis.com/95.0.4638.54/chromedriver_linux64.zip && \
+unzip -qq ch.zip && \
+mv chromedriver /usr/local/bin && \
+rm ch.zip
